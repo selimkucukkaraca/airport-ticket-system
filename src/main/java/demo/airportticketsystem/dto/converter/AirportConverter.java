@@ -1,28 +1,30 @@
 package demo.airportticketsystem.dto.converter;
 
 import demo.airportticketsystem.dto.AirlineCompanyDto;
+import demo.airportticketsystem.dto.AirportDto;
 import demo.airportticketsystem.dto.request.CreateAirlineCompanyRequest;
-import demo.airportticketsystem.model.AirlineCompany;
+import demo.airportticketsystem.dto.request.CreateAirportRequest;
+import demo.airportticketsystem.model.Airport;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AirlineCompanyConverter {
+public class AirportConverter {
 
-    public AirlineCompanyDto converterAirlineCompanyToAirlineCompanyDto(AirlineCompany from){
-        return new AirlineCompanyDto(
+    public AirportDto convertAirportToAirportDto(Airport from){
+        return new AirportDto(
                 from.getName(),
                 from.getCountry(),
-                from.getMail(),
+                from.getCity(),
                 from.getCreateDate(),
                 from.getUpdateDate()
         );
     }
 
-    public AirlineCompany toEntity(CreateAirlineCompanyRequest request){
-        return new AirlineCompany(
+    public Airport toEntity(CreateAirportRequest request){
+        return new Airport(
                 request.getName(),
                 request.getCountry(),
-                request.getMail()
+                request.getCity()
         );
     }
 }
