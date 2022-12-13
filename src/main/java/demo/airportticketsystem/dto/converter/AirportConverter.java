@@ -1,8 +1,6 @@
 package demo.airportticketsystem.dto.converter;
 
-import demo.airportticketsystem.dto.AirlineCompanyDto;
 import demo.airportticketsystem.dto.AirportDto;
-import demo.airportticketsystem.dto.request.CreateAirlineCompanyRequest;
 import demo.airportticketsystem.dto.request.CreateAirportRequest;
 import demo.airportticketsystem.model.Airport;
 import org.springframework.stereotype.Component;

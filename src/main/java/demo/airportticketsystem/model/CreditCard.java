@@ -22,4 +22,10 @@ public class CreditCard extends BaseEntity{
     private int cvv;
     private String expirationDate;
 
+    public CreditCard(String cardNumber, String nameAndLastname, int cvv, String expirationDate) {
+        CardNumber = cardNumber;
+        this.nameAndLastname = nameAndLastname;
+        this.cvv = cvv;
+        this.expirationDate = expirationDate;
+    }
 }
