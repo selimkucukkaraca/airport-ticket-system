@@ -33,8 +33,16 @@ public class AirportController {
     }
 
     @DeleteMapping
-    public ResponseEntity<?> delete(String name){
+    public ResponseEntity<?> delete(@RequestParam String name){
         airportService.delete(name);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/get-by-airport-name")
+    public ResponseEntity<?> getAirportByName(@RequestParam String name){
+        airportService.getAirportByAirportName(name);
+        return ResponseEntity
+                .ok(airportService.getAirportByAirportName(name));
+    }
+
 }

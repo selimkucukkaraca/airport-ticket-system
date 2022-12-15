@@ -22,6 +22,7 @@ public class AirportService {
         this.airportRepository = airportRepository;
     }
 
+
     public AirportDto save(CreateAirportRequest request){
         var saved = airportConverter.toEntity(request);
 
@@ -31,6 +32,7 @@ public class AirportService {
         airportRepository.save(saved);
         return airportConverter.convertAirportToAirportDto(saved);
     }
+
 
     public void delete(String name){
         var fromAirport = getAirportByName(name);
@@ -46,6 +48,10 @@ public class AirportService {
                 .stream()
                 .map(airportConverter::convertAirportToAirportDto)
                 .collect(Collectors.toList());
+    }
+
+    public AirportDto getAirportByAirportName(String name){
+        return airportConverter.convertAirportToAirportDto(airportRepository.findAirportByName(name));
 
     }
 
