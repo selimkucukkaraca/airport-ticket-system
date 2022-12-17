@@ -8,6 +8,9 @@ import demo.airportticketsystem.model.Airport;
 import demo.airportticketsystem.repository.RouteRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class RouteService {
 
@@ -37,6 +40,12 @@ public class RouteService {
         return routeConverter.converterRouteToRouteDto(saved);
     }
 
-
+    public List<RouteDto> getRouteByLandingAndDeparture(String landing, String departure) {
+        return routeRepository.findAll()
+                .stream()
+                .filter(route -> route.getLanding().getName().equals(landing) && route.getDeparture().getName().equals(departure))
+                .map(routeConverter::converterRouteToRouteDto)
+                .collect(Collectors.toList());
+    }
 
 }

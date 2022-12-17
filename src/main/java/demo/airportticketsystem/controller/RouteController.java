@@ -5,10 +5,9 @@ import demo.airportticketsystem.dto.request.CreateRouteRequest;
 import demo.airportticketsystem.service.RouteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/route")
@@ -25,5 +24,11 @@ public class RouteController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(routeService.save(request));
+    }
+
+    @GetMapping("/get-by-departure-and-landing")
+    public ResponseEntity<List<RouteDto>> getRouteByLandingAndDeparture(@RequestParam String landing, @RequestParam String departure) {
+        return ResponseEntity
+                .ok(routeService.getRouteByLandingAndDeparture(landing, departure));
     }
 }
