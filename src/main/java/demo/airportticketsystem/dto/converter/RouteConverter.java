@@ -2,6 +2,8 @@ package demo.airportticketsystem.dto.converter;
 
 import demo.airportticketsystem.dto.RouteDto;
 import demo.airportticketsystem.dto.request.CreateRouteRequest;
+import demo.airportticketsystem.model.AirlineCompany;
+import demo.airportticketsystem.model.Airport;
 import demo.airportticketsystem.model.Route;
 import org.springframework.stereotype.Component;
 
@@ -30,10 +32,11 @@ public class RouteConverter {
         );
     }
 
-    public Route toEntity(CreateRouteRequest request){
+    public Route toEntity(Airport landing, Airport departure, AirlineCompany airlineCompany){
         return new Route(
-                request.getLanding(),
-                request.getDeparture()
+                landing,
+                departure,
+                airlineCompany
         );
     }
 }

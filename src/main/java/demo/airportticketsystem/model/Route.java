@@ -24,9 +24,10 @@ public class Route extends BaseEntity{
     @ManyToOne
     private AirlineCompany airlineCompany;
 
-    public Route(Airport landing, Airport departure) {
+    public Route(Airport landing, Airport departure,AirlineCompany airlineCompany) {
         this.landing = landing;
         this.departure = departure;
+        this.airlineCompany = airlineCompany;
     }
 
     @Override
