@@ -12,7 +12,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class CreditCard extends BaseEntity{
+public class CreditCard extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,4 +28,6 @@ public class CreditCard extends BaseEntity{
         this.cvv = cvv;
         this.expirationDate = expirationDate;
     }
+
+
 }

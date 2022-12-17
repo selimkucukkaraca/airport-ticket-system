@@ -5,9 +5,11 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CreateCreditCardRequest {
-    private String CardNumber;
+public class BuyTicketRequest {
+    private String ticketNumber;
     private String nameAndLastname;
+    private String cardNumber;
     private int cvv;
     private String expirationDate;
+
 }

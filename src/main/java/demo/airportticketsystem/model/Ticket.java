@@ -7,6 +7,7 @@ import org.hibernate.Hibernate;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -14,21 +15,19 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Ticket extends BaseEntity{
+public class Ticket extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @GeneratedValue(strategy = GenerationType.AUTO) // TODO chech
-    private String ticketNumber;
+    private String ticketNumber = UUID.randomUUID().toString();
     private int ticketAmount;
     private BigDecimal price;
     private String date;
     @ManyToOne
     private Route route;
 
-    public Ticket(String ticketNumber, int ticketAmount, BigDecimal price, String date, Route route) {
-        this.ticketNumber = ticketNumber;
+    public Ticket(int ticketAmount, BigDecimal price, String date, Route route) {
         this.ticketAmount = ticketAmount;
         this.price = price;
         this.date = date;

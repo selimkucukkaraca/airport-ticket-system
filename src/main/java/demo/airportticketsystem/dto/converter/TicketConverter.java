@@ -30,7 +30,6 @@ public class TicketConverter {
 
     public Ticket toEntity(CreateTicketRequest request){
         return new Ticket(
-                request.getTicketNumber(),
                 request.getTicketAmount(),
                 request.getPrice(),
                 request.getDate(),

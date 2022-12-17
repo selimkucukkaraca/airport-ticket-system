@@ -1,7 +1,6 @@
 package demo.airportticketsystem.dto.converter;
 
 import demo.airportticketsystem.dto.RouteDto;
-import demo.airportticketsystem.dto.request.CreateRouteRequest;
 import demo.airportticketsystem.model.AirlineCompany;
 import demo.airportticketsystem.model.Airport;
 import demo.airportticketsystem.model.Route;

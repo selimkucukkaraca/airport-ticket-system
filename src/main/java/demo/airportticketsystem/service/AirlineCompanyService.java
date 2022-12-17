@@ -23,42 +23,36 @@ public class AirlineCompanyService {
         this.airlineCompanyRepository = airlineCompanyRepository;
     }
 
-    public AirlineCompanyDto save(CreateAirlineCompanyRequest request){
+    public AirlineCompanyDto save(CreateAirlineCompanyRequest request) {
         var saved = airlineCompanyConverter.toEntity(request);
 
-        if (airlineCompanyRepository.existsAirlineCompaniesByName(saved.getName())){
+        if (airlineCompanyRepository.existsAirlineCompaniesByName(saved.getName())) {
             throw new RuntimeException();
         }
         airlineCompanyRepository.save(saved);
         return airlineCompanyConverter.converterAirlineCompanyToAirlineCompanyDto(saved);
     }
 
-    public void delete(String name){
+    public void delete(String name) {
         var fromAirlineCompany = getAirlineCompanyByName(name);
         airlineCompanyRepository.delete(fromAirlineCompany);
     }
 
-    protected AirlineCompany getAirlineCompanyByName(String name){
+    protected AirlineCompany getAirlineCompanyByName(String name) {
         return airlineCompanyRepository.findAirlineCompaniesByName(name);
     }
 
-    public List<AirlineCompanyDto> getAll(){
+    public List<AirlineCompanyDto> getAll() {
         return airlineCompanyRepository.findAll()
                 .stream()
                 .map(airlineCompanyConverter::converterAirlineCompanyToAirlineCompanyDto)
                 .collect(Collectors.toList());
     }
 
-    public AirlineCompanyDto getAirlineCompanyByAirlineCompanyName(String name){
+    public AirlineCompanyDto getAirlineCompanyByAirlineCompanyName(String name) {
         return airlineCompanyConverter.converterAirlineCompanyToAirlineCompanyDto
                 (airlineCompanyRepository.findAirlineCompaniesByName(name));
     }
-
-
-
-
-
-
 
 
 }

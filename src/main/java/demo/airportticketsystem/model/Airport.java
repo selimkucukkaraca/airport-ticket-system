@@ -15,7 +15,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Airport extends BaseEntity{
+public class Airport extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

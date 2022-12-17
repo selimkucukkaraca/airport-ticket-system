@@ -12,7 +12,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-public class Route extends BaseEntity{
+public class Route extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,7 +24,7 @@ public class Route extends BaseEntity{
     @ManyToOne
     private AirlineCompany airlineCompany;
 
-    public Route(Airport landing, Airport departure,AirlineCompany airlineCompany) {
+    public Route(Airport landing, Airport departure, AirlineCompany airlineCompany) {
         this.landing = landing;
         this.departure = departure;
         this.airlineCompany = airlineCompany;

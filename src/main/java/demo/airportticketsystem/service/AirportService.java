@@ -23,10 +23,10 @@ public class AirportService {
     }
 
 
-    public AirportDto save(CreateAirportRequest request){
+    public AirportDto save(CreateAirportRequest request) {
         var saved = airportConverter.toEntity(request);
 
-        if (airportRepository.existsAirportByName(saved.getName())){
+        if (airportRepository.existsAirportByName(saved.getName())) {
             throw new RuntimeException();
         }
         airportRepository.save(saved);
@@ -34,28 +34,26 @@ public class AirportService {
     }
 
 
-    public void delete(String name){
+    public void delete(String name) {
         var fromAirport = getAirportByName(name);
         airportRepository.delete(fromAirport);
     }
 
-    protected Airport getAirportByName(String name){
+    protected Airport getAirportByName(String name) {
         return airportRepository.findAirportByName(name);
     }
 
-    public List<AirportDto> getAll(){
+    public List<AirportDto> getAll() {
         return airportRepository.findAll()
                 .stream()
                 .map(airportConverter::convertAirportToAirportDto)
                 .collect(Collectors.toList());
     }
 
-    public AirportDto getAirportByAirportName(String name){
+    public AirportDto getAirportByAirportName(String name) {
         return airportConverter.convertAirportToAirportDto(airportRepository.findAirportByName(name));
 
     }
-
-
 
 
 }
