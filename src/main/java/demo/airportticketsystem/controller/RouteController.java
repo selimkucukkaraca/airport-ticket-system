@@ -3,6 +3,7 @@ package demo.airportticketsystem.controller;
 import demo.airportticketsystem.dto.RouteDto;
 import demo.airportticketsystem.dto.request.CreateRouteRequest;
 import demo.airportticketsystem.service.RouteService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class RouteController {
     }
 
     @PostMapping
-    public ResponseEntity<RouteDto> save(@RequestBody CreateRouteRequest request){
+    public ResponseEntity<RouteDto> save(@Valid @RequestBody CreateRouteRequest request){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(routeService.save(request));

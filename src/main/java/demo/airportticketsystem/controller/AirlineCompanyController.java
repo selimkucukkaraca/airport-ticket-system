@@ -3,6 +3,7 @@ package demo.airportticketsystem.controller;
 import demo.airportticketsystem.dto.AirlineCompanyDto;
 import demo.airportticketsystem.dto.request.CreateAirlineCompanyRequest;
 import demo.airportticketsystem.service.AirlineCompanyService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class AirlineCompanyController {
     }
 
     @PostMapping
-    public ResponseEntity<AirlineCompanyDto> save(@RequestBody CreateAirlineCompanyRequest request){
+    public ResponseEntity<AirlineCompanyDto> save(@Valid @RequestBody CreateAirlineCompanyRequest request){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(airlineCompanyService.save(request));
