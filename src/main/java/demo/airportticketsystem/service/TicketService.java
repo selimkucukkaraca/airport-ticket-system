@@ -5,6 +5,7 @@ import demo.airportticketsystem.dto.converter.TicketConverter;
 import demo.airportticketsystem.dto.request.BuyTicketRequest;
 import demo.airportticketsystem.dto.request.CreateCreditCardRequest;
 import demo.airportticketsystem.dto.request.CreateTicketRequest;
+import demo.airportticketsystem.exception.NotFoundException;
 import demo.airportticketsystem.model.Ticket;
 import demo.airportticketsystem.repository.TicketRepository;
 import org.springframework.stereotype.Service;
@@ -35,11 +36,13 @@ public class TicketService {
     }
 
     public TicketDto getTicketByTicketNumber(String ticketNumber) {
-        return ticketConverter.convertTicketToTicketDto(ticketRepository.findTicketByTicketNumber(ticketNumber));
+        return ticketConverter.convertTicketToTicketDto(ticketRepository.findTicketByTicketNumber(ticketNumber)
+                .orElseThrow(() -> new NotFoundException("ticket number not found : " + ticketNumber)));
     }
 
     public TicketDto buyTicket(BuyTicketRequest request) {
-        Ticket fromDbTicket = ticketRepository.findTicketByTicketNumber(request.getTicketNumber());
+        Ticket fromDbTicket = ticketRepository.findTicketByTicketNumber(request.getTicketNumber())
+                .orElseThrow(() -> new NotFoundException("ticket not found : " + request.getTicketNumber()));
 
         fromDbTicket.setTicketAmount(fromDbTicket.getTicketAmount() - 1);
 

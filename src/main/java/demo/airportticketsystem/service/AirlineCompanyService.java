@@ -3,6 +3,8 @@ package demo.airportticketsystem.service;
 import demo.airportticketsystem.dto.AirlineCompanyDto;
 import demo.airportticketsystem.dto.converter.AirlineCompanyConverter;
 import demo.airportticketsystem.dto.request.CreateAirlineCompanyRequest;
+import demo.airportticketsystem.exception.NotFoundException;
+import demo.airportticketsystem.exception.generic.GenericExistException;
 import demo.airportticketsystem.model.AirlineCompany;
 import demo.airportticketsystem.repository.AirlineCompanyRepository;
 import org.springframework.stereotype.Service;
@@ -27,7 +29,7 @@ public class AirlineCompanyService {
         var saved = airlineCompanyConverter.toEntity(request);
 
         if (airlineCompanyRepository.existsAirlineCompaniesByName(saved.getName())) {
-            throw new RuntimeException();
+            throw new GenericExistException(request.getName() + " exist");
         }
         airlineCompanyRepository.save(saved);
         return airlineCompanyConverter.converterAirlineCompanyToAirlineCompanyDto(saved);
@@ -39,7 +41,8 @@ public class AirlineCompanyService {
     }
 
     protected AirlineCompany getAirlineCompanyByName(String name) {
-        return airlineCompanyRepository.findAirlineCompaniesByName(name);
+        return airlineCompanyRepository.findAirlineCompaniesByName(name)
+                .orElseThrow(() ->new NotFoundException("airline company not found : " + name) );
     }
 
     public List<AirlineCompanyDto> getAll() {
@@ -51,8 +54,7 @@ public class AirlineCompanyService {
 
     public AirlineCompanyDto getAirlineCompanyByAirlineCompanyName(String name) {
         return airlineCompanyConverter.converterAirlineCompanyToAirlineCompanyDto
-                (airlineCompanyRepository.findAirlineCompaniesByName(name));
+                (airlineCompanyRepository.findAirlineCompaniesByName(name)
+                        .orElseThrow(() -> new NotFoundException("airline company not found : " + name)));
     }
-
-
 }

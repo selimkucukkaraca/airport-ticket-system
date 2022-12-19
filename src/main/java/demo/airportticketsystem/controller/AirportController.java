@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/airport")
+@CrossOrigin
 public class AirportController {
 
     private final AirportService airportService;

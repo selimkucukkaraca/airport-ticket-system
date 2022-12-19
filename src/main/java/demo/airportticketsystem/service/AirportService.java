@@ -3,6 +3,8 @@ package demo.airportticketsystem.service;
 import demo.airportticketsystem.dto.AirportDto;
 import demo.airportticketsystem.dto.converter.AirportConverter;
 import demo.airportticketsystem.dto.request.CreateAirportRequest;
+import demo.airportticketsystem.exception.NotFoundException;
+import demo.airportticketsystem.exception.generic.GenericExistException;
 import demo.airportticketsystem.model.Airport;
 import demo.airportticketsystem.repository.AirportRepository;
 import org.springframework.stereotype.Service;
@@ -27,7 +29,7 @@ public class AirportService {
         var saved = airportConverter.toEntity(request);
 
         if (airportRepository.existsAirportByName(saved.getName())) {
-            throw new RuntimeException();
+            throw new GenericExistException(request.getName() + " exist");
         }
         airportRepository.save(saved);
         return airportConverter.convertAirportToAirportDto(saved);
@@ -40,7 +42,8 @@ public class AirportService {
     }
 
     protected Airport getAirportByName(String name) {
-        return airportRepository.findAirportByName(name);
+        return airportRepository.findAirportByName(name)
+                .orElseThrow(() -> new NotFoundException("airport not found : " + name));
     }
 
     public List<AirportDto> getAll() {
@@ -51,7 +54,8 @@ public class AirportService {
     }
 
     public AirportDto getAirportByAirportName(String name) {
-        return airportConverter.convertAirportToAirportDto(airportRepository.findAirportByName(name));
+        return airportConverter.convertAirportToAirportDto(airportRepository.findAirportByName(name)
+                .orElseThrow(()-> new NotFoundException("airport not found : " + name)));
 
     }
 

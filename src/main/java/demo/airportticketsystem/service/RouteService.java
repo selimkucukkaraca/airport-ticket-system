@@ -4,6 +4,7 @@ import demo.airportticketsystem.dto.RouteDto;
 import demo.airportticketsystem.dto.converter.RouteConverter;
 import demo.airportticketsystem.dto.request.CreateRouteRequest;
 import demo.airportticketsystem.dto.request.CreateTicketRequest;
+import demo.airportticketsystem.exception.NotFoundException;
 import demo.airportticketsystem.model.AirlineCompany;
 import demo.airportticketsystem.model.Airport;
 import demo.airportticketsystem.repository.RouteRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,6 +41,7 @@ public class RouteService {
         Airport landing = airportService.getAirportByName(request.getLanding());
         Airport departure = airportService.getAirportByName(request.getDeparture());
         AirlineCompany airlineCompany = airlineCompanyService.getAirlineCompanyByName(request.getAirlineCompany());
+
 
         var saved = routeConverter.toEntity(landing, departure, airlineCompany);
 
