@@ -10,7 +10,6 @@ public class CreateAirlineCompanyRequest {
     private String name;
     @NotBlank
     private String country;
-    @NotBlank
     private String mail;
 
 }

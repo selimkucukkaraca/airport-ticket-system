@@ -16,7 +16,7 @@ public class BuyTicketRequest {
     private String cardNumber;
     @NotBlank
     private int cvv;
-    @NotNull
+    @NotBlank
     private String expirationDate;
 
 }
